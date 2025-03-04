@@ -36,3 +36,4 @@ async def chat(req: ChatRequest):  # Accepts the user's input message
         messages=[{"role": "user", "content": req.message}],  # Sends your input message to the AI
     )
     return {"reply": response.content[0].text}  # Returns the AI's response in JSON format
+
