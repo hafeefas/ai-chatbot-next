@@ -1,24 +1,201 @@
-@import "tailwindcss";
-
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* style.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.chat-title {
+  background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+  color: white;
+  padding: 20px;
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chat-title::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.welcome-message {
+  font-size: 20px;
+  color: #ff1493;
+  margin-top: 20px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(255, 20, 147, 0.2);
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(255, 20, 147, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 80vh;
+  max-height: 800px;
+  margin-top: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 20, 147, 0.1);
+}
+
+.messages-container {
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.message {
+  max-width: 85%;
+  padding: 12px 18px;
+  margin: 5px 0;
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  opacity: 0;
+  animation: fadeIn 0.6s forwards;
+  box-shadow: 0 2px 8px #ff1493;
+}
+
+.user-message {
+  background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+  color: white;
+  align-self: flex-end;
+  border-radius: 20px 20px 0 20px;
+  animation-delay: 0.3s;
+  border: 1px solid rgba(255, 20, 147, 0.2);
+}
+
+.ai-message {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: #ffffff;
+  align-self: flex-start;
+  border-radius: 20px 20px 20px 0;
+  animation-delay: 0.3s;
+  border: 1px solid rgba(255, 20, 147, 0.1);
+}
+
+.role {
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.loading {
+  font-size: 14px;
+  font-style: italic;
+  color: #ff1493;
+  text-align: center;
+  padding: 10px 0;
+  animation: fadeIn 1s ease-out;
+  opacity: 0.7;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-top: 1px solid rgba(255, 20, 147, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.input {
+  width: 80%;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 20, 147, 0.2);
+  font-size: 16px;
+  color: white;
+  transition: all 0.3s ease;
+  background-color: rgba(26, 26, 26, 0.9);
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ff1493;
+  box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.1);
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.send-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(255, 20, 147, 0.2);
+  font-weight: 500;
+}
+
+.send-button:hover {
+  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 20, 147, 0.3);
+}
+
+.send-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(255, 20, 147, 0.2);
+}
+
+/* Animation for fading in and sliding */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

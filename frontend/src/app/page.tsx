@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios'
 
 
@@ -7,6 +7,7 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<{role: string, content: string}[]>([])
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const sentMessage = async () => {
     if (!input.trim()) return;
@@ -32,23 +33,44 @@ export default function Home() {
     }
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      sentMessage();
+    }
+  };
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]); 
+
   return (
-    <section>
-      {messages.map((msg, index) => (
-        <div key={index} style={{ color: msg.role === "user" ? "pink" : "green" }}>
-          {msg.role}: {msg.content}
-        </div>
-      ))}
+    <main className="chat-container">
+      <h1 className="chat-title"> Welcome to HafeefAi!</h1>
 
-      {loading && <div> Loading... </div>}
+      <section className="messages-container">
+        {messages.map((msg, index) => (
+          <article key={index} className={`message ${msg.role === "user" ? "user-message" : "ai-message"}`}>
+            <span className="role">{msg.role === "user" ? "You" : "AI"}:</span> {msg.content}
+          </article>
+        ))}
+        {loading && <p className="loading">AI is typing...</p>}
+        <div ref={messagesEndRef}></div>
+      </section>
 
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Type your message"
-      />
-      <button onClick={sentMessage}>Send</button>
-    </section>
-  );
+      <footer className="input-container">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Type your message..."
+          className="input"
+        />
+        <button onClick={sentMessage} className="send-button">
+          Send
+        </button>
+      </footer>
+  </main>  );
 }
