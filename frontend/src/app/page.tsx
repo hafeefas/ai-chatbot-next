@@ -73,5 +73,6 @@ export default function Home() {
           Send
         </button>
       </footer>
+      <div className='helpful-tip'> If I'm not working, it likely means there is a server overload on Anothropic's side, nothing really wrong with me! Just try again later :D</div>
   </main>  );
 }
