@@ -47,7 +47,8 @@ export default function Home() {
 
   return (
     <main className="chat-container">
-      <h1 className="chat-title"> Welcome to HafeefAi!</h1>
+      <h1 className="chat-title"> Welcome to Hafeef<em>Ai</em> ! </h1>
+      <h2> ai </h2>
 
       <section className="messages-container">
         {messages.map((msg, index) => (
