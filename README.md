@@ -2,7 +2,7 @@
 
 ## 📚 **Overview**
 
-The **HafeefaI Chatbot App** is a web application built using **Next.js**, **TypeScript**, and **FastAPI**. It is designed to interact with users through an **AI-powered chatbot**, providing engaging and informative responses.
+The **Hafeef<em>AI</em> Chatbot App** is a web application built using **Next.js**, **TypeScript**, and **FastAPI**. It is designed to interact with users through an **AI-powered chatbot**, providing engaging and informative responses.
 The frontend is powered by **Next.js** and **TypeScript**, while the backend uses **FastAPI** to handle API calls and data processing.
 
 ## 💡 **Inspiration**
