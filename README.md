@@ -1,4 +1,4 @@
-# **HafeefaI Chatbot App**
+# **Hafeef<em>AI</em> Chatbot App**
 
 ## 📚 **Overview**
 
